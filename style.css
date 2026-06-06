@@ -1,4 +1,165 @@
-<<<<<<< HEAD
+
+/* === Dark Themed Tic Tac Toe with Animated Cells === */
+:root{
+  --bg: #0f1115;
+  --panel: #171a22;
+  --ink: #e7e9ee;
+  --muted: #9aa3b2;
+  --accent: #5eead4;
+  --accent-2: #7aa2ff;
+  --x: #ff6b6b;
+  --o: #4cd3ff;
+  --cell-grad-1: #242938;
+  --cell-grad-2: #1c1f2b;
+  --cut: 12px;
+}
+
+/* this is the main body of the board */
+body {
+  background: radial-gradient(1200px 800px at 20% -10%, #1a2030 0%, #0f1115 50%, #0b0d12 100%) fixed;
+  color: var(--ink);
+  font-family: "Permanent Marker", cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+#gameContainer{
+  text-align: center;
+  max-width: 420px;
+  margin: 24px auto;
+  padding: 16px 14px 24px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0));
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+/* Grid */
+#cellContainer{
+  display: grid;
+  grid-template-columns: repeat(3, 75px);
+  gap: 10px;
+  width: auto;
+  margin: 16px auto 10px;
+  transform: translateX(30px);
+}
+
+/* Unique cell design */
+.cell{
+  position: relative;
+  width: 75px;
+  height: 75px;
+  line-height: 75px;
+  font-size: 50px;
+  cursor: pointer;
+  text-align: center;
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--cell-grad-1), var(--cell-grad-2));
+  border: none;
+  clip-path: polygon(
+    calc(0% + var(--cut)) 0%,
+    100% 0%,
+    100% calc(100% - var(--cut)),
+    calc(100% - var(--cut)) 100%,
+    0% 100%,
+    0% var(--cut)
+  );
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.06),
+              0 6px 14px rgba(0,0,0,0.45);
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+
+/* Animated glowing rim */
+.cell::before{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  background: conic-gradient(from 180deg,
+    transparent 0 15%,
+    rgba(126,180,255,.25) 20% 35%,
+    transparent 40% 55%,
+    rgba(94,234,212,.25) 60% 75%,
+    transparent 80% 100%);
+  mix-blend-mode: screen;
+  filter: blur(8px) opacity(.35);
+  transition: opacity .2s ease;
+  animation: rimFlow 6s linear infinite;
+  clip-path: inherit;
+}
+@keyframes rimFlow{ to{ transform: rotate(360deg); } }
+
+.cell:hover{
+  transform: translateY(-2px);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.09),
+              0 10px 18px rgba(0,0,0,0.55);
+}
+
+/* Pop animation when placing symbol */
+.cell.placing{ animation: popIn .35s ease; }
+@keyframes popIn{
+  0%{ transform: scale(.6) rotate(-6deg); }
+  60%{ transform: scale(1.1) rotate(2deg); }
+  100%{ transform: scale(1) rotate(0deg); }
+}
+
+/* X and O glow colors */
+.cell.x{ color: var(--x); text-shadow: 0 0 10px var(--x); }
+.cell.o{ color: var(--o); text-shadow: 0 0 10px var(--o); }
+
+/* Subtle pulse effect */
+.cell.placing.x::after,
+.cell.placing.o::after{
+  content:"";
+  position:absolute; inset:-2px;
+  border: 2px solid currentColor;
+  clip-path: inherit;
+  opacity:.5;
+  filter: blur(2px);
+  animation: pulse 420ms ease;
+}
+@keyframes pulse{
+  from{ transform: scale(.9); opacity:.6; }
+  to{ transform: scale(1.1); opacity:0; }
+}
+
+/* Scoreboard & Leaderboard */
+.scoreboard{
+  width: 280px;
+  margin: 0 auto 10px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+}
+.scoreboard h3, .scoreboard h4{ margin: 6px 0; }
+
+button.small{
+  font-size: 12px;
+  padding: 6px 10px;
+  background: linear-gradient(180deg, var(--accent-2), #506adf);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(82,110,255,.35);
+  cursor: pointer;
+}
+button.small:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+
+.leaderboard{
+  width: 280px;
+  margin: 14px auto 0;
+  text-align: left;
+}
+.leaderboard li{
+  margin: 2px 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
 /* === Dark Themed Tic Tac Toe with Animated Cells === */
 :root{
   --bg: #0f1115;
@@ -153,7 +314,7 @@ button.small:hover{ transform: translateY(-1px); filter: brightness(1.05); }
 .leaderboard{
   width: 280px;
   margin: 14px auto 0;
-  text-align: left;
+  text-align: center;
 }
 .leaderboard li{
   margin: 2px 0;
@@ -165,165 +326,92 @@ button.small:hover{ transform: translateY(-1px); filter: brightness(1.05); }
   html { font-size: 16px; }        
   #gameContainer { line-height: 1.35; }
 }
-=======
-/* === Dark Themed Tic Tac Toe with Animated Cells === */
-:root{
-  --bg: #0f1115;
-  --panel: #171a22;
-  --ink: #e7e9ee;
-  --muted: #9aa3b2;
-  --accent: #5eead4;
-  --accent-2: #7aa2ff;
-  --x: #ff6b6b;
-  --o: #4cd3ff;
-  --cell-grad-1: #242938;
-  --cell-grad-2: #1c1f2b;
-  --cut: 12px;
-}
-
-/* this is the main body of the board */
-body {
-  background: radial-gradient(1200px 800px at 20% -10%, #1a2030 0%, #0f1115 50%, #0b0d12 100%) fixed;
-  color: var(--ink);
-  font-family: "Permanent Marker", cursive;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0;
-}
-
-#gameContainer{
-  text-align: center;
-  max-width: 420px;
-  margin: 24px auto;
-  padding: 16px 14px 24px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0));
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-}
-
-/* Grid */
-#cellContainer{
-  display: grid;
-  grid-template-columns: repeat(3, 75px);
-  gap: 10px;
-  width: auto;
-  margin: 16px auto 10px;
-  transform: translateX(28px);
-}
-
-/* Unique cell design */
-.cell{
-  position: relative;
-  width: 75px;
-  height: 75px;
-  line-height: 75px;
-  font-size: 50px;
-  cursor: pointer;
-  text-align: center;
-  color: var(--ink);
-  background: linear-gradient(160deg, var(--cell-grad-1), var(--cell-grad-2));
-  border: none;
-  clip-path: polygon(
-    calc(0% + var(--cut)) 0%,
-    100% 0%,
-    100% calc(100% - var(--cut)),
-    calc(100% - var(--cut)) 100%,
-    0% 100%,
-    0% var(--cut)
-  );
-  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.06),
-              0 6px 14px rgba(0,0,0,0.45);
-  transition: transform .15s ease, box-shadow .2s ease;
-}
-
-/* Animated glowing rim */
-.cell::before{
-  content:"";
-  position:absolute; inset:0;
-  pointer-events:none;
-  background: conic-gradient(from 180deg,
-    transparent 0 15%,
-    rgba(126,180,255,.25) 20% 35%,
-    transparent 40% 55%,
-    rgba(94,234,212,.25) 60% 75%,
-    transparent 80% 100%);
+.cell.placing::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  background: radial-gradient(circle at center,
+              currentColor 0%,
+              transparent 70%);
+  opacity: 0;
+  animation: placeRipple 0.4s ease-out;
+  pointer-events: none;
   mix-blend-mode: screen;
-  filter: blur(8px) opacity(.35);
-  transition: opacity .2s ease;
-  animation: rimFlow 6s linear infinite;
-  clip-path: inherit;
-}
-@keyframes rimFlow{ to{ transform: rotate(360deg); } }
-
-.cell:hover{
-  transform: translateY(-2px);
-  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.09),
-              0 10px 18px rgba(0,0,0,0.55);
 }
 
-/* Pop animation when placing symbol */
-.cell.placing{ animation: popIn .35s ease; }
-@keyframes popIn{
-  0%{ transform: scale(.6) rotate(-6deg); }
-  60%{ transform: scale(1.1) rotate(2deg); }
-  100%{ transform: scale(1) rotate(0deg); }
+@keyframes placeRipple {
+  0%   { opacity: .8; transform: scale(0.3); filter: blur(1px); }
+  70%  { opacity: .4; transform: scale(1.4); filter: blur(3px); }
+  100% { opacity: 0;   transform: scale(1.8); filter: blur(6px); }
+}
+.playOption {
+  margin: 10px 0;
 }
 
-/* X and O glow colors */
-.cell.x{ color: var(--x); text-shadow: 0 0 10px var(--x); }
-.cell.o{ color: var(--o); text-shadow: 0 0 10px var(--o); }
-
-/* Subtle pulse effect */
-.cell.placing.x::after,
-.cell.placing.o::after{
-  content:"";
-  position:absolute; inset:-2px;
-  border: 2px solid currentColor;
-  clip-path: inherit;
-  opacity:.5;
-  filter: blur(2px);
-  animation: pulse 420ms ease;
-}
-@keyframes pulse{
-  from{ transform: scale(.9); opacity:.6; }
-  to{ transform: scale(1.1); opacity:0; }
+.symbolBtn {
+  margin: 0 5px;
+  padding: 8px 15px;
+  font-size: 16px;
+  border: 2px solid #333;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.2s;
 }
 
-/* Scoreboard & Leaderboard */
-.scoreboard{
-  width: 280px;
-  margin: 0 auto 10px;
-  padding: 10px 12px;
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 12px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+.symbolBtn.active,
+.symbolBtn:hover {
+  background-color: #4CAF50;
+  color: white;
 }
-.scoreboard h3, .scoreboard h4{ margin: 6px 0; }
-
-button.small{
-  font-size: 12px;
-  padding: 6px 10px;
+/* Restart btn*/
+#restartBtn {
+  font-size: 14px;
+  padding: 8px 16px;
   background: linear-gradient(180deg, var(--accent-2), #506adf);
   color: white;
   border: none;
   border-radius: 8px;
   box-shadow: 0 6px 12px rgba(82,110,255,.35);
   cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+  margin-top: 10px;
 }
-button.small:hover{ transform: translateY(-1px); filter: brightness(1.05); }
 
-.leaderboard{
-  width: 280px;
-  margin: 14px auto 0;
-  text-align: left;
+#restartBtn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
 }
-.leaderboard li{
-  margin: 2px 0;
-  font-size: 14px;
-  color: var(--muted);
+
+#restartBtn:active {
+  transform: translateY(0);
+  filter: brightness(0.95);
 }
->>>>>>> 4e833798f04d535fb6e4435c8492c049d7235fd5
+.difficulty select {
+  background: linear-gradient(
+    135deg,
+    rgb(80, 106, 223) 0%,
+    rgb(94, 234, 212) 100%
+  );
+  color: rgb(20, 24, 32); 
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-weight: 600;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+  appearance: none;
+}
+/* provides a color for the selct button */
+.difficulty select option {
+  background-color: rgb(25, 28, 38); 
+  color: rgb(231, 233, 238); /* light text */
+}
+
+/* focus effect for glow */
+.difficulty select:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(122, 162, 255, 0.5);
+  transform: translateY(-1px);
+}

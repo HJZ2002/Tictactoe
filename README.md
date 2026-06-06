@@ -1,26 +1,26 @@
 🎮 Gameplay & Logic
 
-🧩 Replaced round randomization with a player-choice prompt (X or O) every new round — including after Restart.
+🧩 Added X and O selection buttons — players can now choose their side directly using stylish buttons with glowing effects (no more log or text prompt).
 
-🔺 X always starts; if the player chooses O, the AI opens first.
+🔺 X always starts; if the player chooses O, the AI automatically opens the round.
 
-🌟 Added dynamic win-line highlight (3 cells flash and glow).
+✨ Both X and O are now fully functional, with smooth animations and color consistency across rounds.
 
-🛡️ Improved input handling — no duplicate clicks or moves during AI’s turn.
+🌟 Dynamic win-line highlight — winning cells flash and glow for extra feedback.
 
-🖥️ UI / UX Enhancements 
+🛡️ Improved input handling — prevents duplicate clicks and blocks player moves during AI’s turn.
 
-<<<<<<< HEAD
-🎨 Automatically injects a “Color-Blind Mode” button beside Restart 
-=======
-🎨 Automatically injects a “Color-Blind Mode” button beside Restart
->>>>>>> 4e833798f04d535fb6e4435c8492c049d7235fd5
+🖥️ UI / UX Enhancements
 
-🌀 Respects reduced-motion preferences (disables animations if system requests less motion).
+🎨 New Restart button style — now matches “Change Name” and “Color-Blind Mode” buttons for a unified look.
+
+🎨 Automatically injects a “Color-Blind Mode” button beside Restart for quick accessibility toggling.
+
+🌀 Respects reduced-motion preferences — disables animations if the system requests less motion.
 
 🌈 Color-Blind Support & Theming
 
-👁️‍🗨️ Implemented five high-contrast palettes
+👁️‍🗨️ Five high-contrast palettes implemented:
 
 🎯 Default – Red / Cyan
 
@@ -32,22 +32,20 @@
 
 ⚫ Monochrome – Light Gray / Dark Gray
 
-🪄 Cycles through palettes with the Color-Blind Mode button and remembers your last selection via localStorage.
+🪄 Color-Blind Mode button cycles through palettes and saves your last choice in localStorage.
 
-🎨 Kept the original Change Color buttons active — they randomize UI accents without overwriting X/O colors.
+🎨 Change Color buttons remain active — they randomize UI accent hues without affecting X/O colors.
 
 🏆 Score & Leaderboard
 
-📊 All existing scoring and fastest-time logic remain intact.
+📊 Existing scoring and fastest-time tracking remain intact.
 
-🧹 Added a 50-entry cap to the leaderboard for performance and storage safety.
+🧹 Added a 50-entry cap on the leaderboard for performance and storage safety.
 
-💡Extra Chnges
+💡 Extra Updates
 
-✅ Smoother round flow (choose X / O each time).
-
-🌟 Clearer visual feedback when someone wins.
-
-⌨️ Playable entirely by keyboard + screen-reader friendly.
-
-🎨 Color accessibility that persists across sessions.
+✅ Smoother round flow — choose X or O each time before playing.
+🌟 Clearer visual feedback when a player or AI wins.
+⌨️ Fully keyboard-friendly and screen-reader accessible.
+🎨 Color accessibility and theme settings now persist between sessions.
+⌨️ Bug Fixes from the buttons

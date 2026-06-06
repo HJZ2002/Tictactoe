@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,29 +9,38 @@
 <body>
   <div id="gameContainer">
     <h1>Tic Tac Toe</h1>
-    <!--Difficulty option to choose for the game-->
-    <div class = "difficulty">
-      <label>Difficulty</label>
-      <select id ="difficultySelect">
-        <option value="Easy">Easy</option>
-        <option value="Normal">Normal</option>
-        <option value="Hard">Hard</option>
+
+    <!-- Difficulty -->
+    <div class="difficulty">
+      <label>Difficulty:</label>
+      <select id="difficultySelect">
+        <option value="easy">Easy</option>
+        <option value="normal" selected>Normal</option>
+        <option value="hard">Hard</option>
       </select>
     </div>
 
+    <!--Play Option for the user-->
+    <div class="playOption">
+      <label>Play as:
+        <button id = "playAsX" class="symbolBtn active">X</button>
+        <button id = "playAsO" class="symbolBtn active">O</button>
+      </label>
+    </div>
+    
     <!-- Scoreboard -->
     <div id="scoreboard" class="scoreboard">
       <h3>
         Player (<span id="playerName">Player</span>) Score:
         <span id="playerScore">0</span>
       </h3>
-      <h3>Highest (All-Time): <span id="aiScore">0</span></h3>
-      <h4>AI Score: <span id="highScore">0</span></h4>
-      <h4>Best of the best (All-Time)): <span id="bestTime">—</span></h4>
+      <h3>Highest (All-Time): <span id="highScore">0</span></h3>
+      <h4>AI Score: <span id="aiScore">0</span></h4>
+      <h4>Best Time: <span id="bestTime">—</span></h4>
       <button id="changeNameBtn" class="small">Change Name</button>
-      
     </div>
 
+    <!-- Board -->
     <div id="cellContainer">
       <div cellIndex="0" class="cell"></div>
       <div cellIndex="1" class="cell"></div>
@@ -50,62 +58,10 @@
 
     <!-- Fastest Wins Leaderboard -->
     <section id="leaderboard" class="leaderboard">
-      <h3>Fastest Wins (Your all time Record )</h3>
+      <h3>Your overall leaderboard</h3>
       <ol id="leaderboardList"></ol>
     </section>
   </div>
   <script src="script.js"></script>
 </body>
 </html>
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tic Tac Toe</title>
-  <link rel="stylesheet" href="style.css"/>
-</head>
-<body>
-  <div id="gameContainer">
-    <h1>Tic Tac Toe</h1>
-
-    <!-- Scoreboard -->
-    <div id="scoreboard" class="scoreboard">
-      <h3>
-        Player (<span id="playerName">Player</span>) Score:
-        <span id="playerScore">0</span>
-      </h3>
-      <h3>Highest (All-Time): <span id="aiScore">0</span></h3>
-      <h4>AI Score: <span id="highScore">0</span></h4>
-      <h4>Best of the best (All-Time)): <span id="bestTime">—</span></h4>
-      <button id="changeNameBtn" class="small">Change Name</button>
-      
-    </div>
-
-    <div id="cellContainer">
-      <div cellIndex="0" class="cell"></div>
-      <div cellIndex="1" class="cell"></div>
-      <div cellIndex="2" class="cell"></div>
-      <div cellIndex="3" class="cell"></div>
-      <div cellIndex="4" class="cell"></div>
-      <div cellIndex="5" class="cell"></div>
-      <div cellIndex="6" class="cell"></div>
-      <div cellIndex="7" class="cell"></div>
-      <div cellIndex="8" class="cell"></div>
-    </div>
-
-    <h2 id="statusText"></h2>
-    <button id="restartBtn">Restart</button>
-
-    <!-- Fastest Wins Leaderboard -->
-    <section id="leaderboard" class="leaderboard">
-      <h3>Fastest Wins (Top 10 Meaning it's better)</h3>
-      <ol id="leaderboardList"></ol>
-    </section>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
-
